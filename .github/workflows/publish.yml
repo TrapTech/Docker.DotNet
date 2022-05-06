@@ -34,7 +34,8 @@ jobs:
       - name: Push packages to NuGet.org
         run: |
           ls -al ./packages/
-          dotnet nuget push './packages/Docker.DotNet.*.nupkg' -k ${{ secrets.GITHUB_TOKEN }} -s "https://nuget.pkg.github.com/${GITHUB_REPOSITORY}/index.json"
+          dotnet nuget add source --username $GITHUB_REPOSITORY_OWNER --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${GITHUB_REPOSITORY}/index.json"
+          dotnet nuget push './packages/Docker.DotNet.*.nupkg' -s "github"
       - name: Create Release
         uses: actions/create-release@master
         env:
