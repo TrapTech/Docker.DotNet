@@ -33,7 +33,7 @@ jobs:
           DNF_CODESIGN_SECRET: ${{secrets.DNF_CODESIGN_SECRET}}
       - name: Push packages to NuGet.org
         run: |
-          ls -al
+          ls -al ./packages/
           dotnet nuget push './packages/Docker.DotNet.*.nupkg' -k ${{ secrets.GITHUB_TOKEN }} -s "https://nuget.pkg.github.com/${GITHUB_REPOSITORY}/index.json"
       - name: Create Release
         uses: actions/create-release@master
