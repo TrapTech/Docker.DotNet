@@ -22,6 +22,7 @@ jobs:
       - name: Create Packages 
         run: dotnet pack -c Release -o packages
       - name: Sign Packages
+        if: false
         run: |
           echo $DNF_CODESIGN_CONFIG > ./packages/sign.json
           ./SignClient sign --config "./packages/sign.json" --input "./packages/**/*.nupkg" --name "Docker.DotNet" --user "$DNF_CODESIGN_USER" --secret "$DNF_CODESIGN_SECRET" --Description "Docker.Net" --descriptionUrl "https://github.com/dotnet/Docker.DotNet"
@@ -32,7 +33,8 @@ jobs:
           DNF_CODESIGN_SECRET: ${{secrets.DNF_CODESIGN_SECRET}}
       - name: Push packages to NuGet.org
         run: |
-          dotnet nuget push ./packages/Docker.DotNet.*.nupkg -k ${{ secrets.NUGET_KEY }} -s https://api.nuget.org/v3/index.json
+          ls -al
+          dotnet nuget push './packages/Docker.DotNet.*.nupkg' -k ${{ secrets.GITHUB_TOKEN }} -s "https://nuget.pkg.github.com/${GITHUB_REPOSITORY}/index.json"
       - name: Create Release
         uses: actions/create-release@master
         env:
