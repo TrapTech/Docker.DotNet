@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>Docker.DotNet</PackageId>
-    <Description>Docker.DotNet is a library that allows you to interact with the Docker Remote API programmatically with fully asynchronous, non-blocking and object-oriented code in your .NET applications.</Description>
+    <PackageId>Mdarocha.Docker.DotNet</PackageId>
+    <Description>[FORK] Docker.DotNet is a library that allows you to interact with the Docker Remote API programmatically with fully asynchronous, non-blocking and object-oriented code in your .NET applications. This fork includes some additional fixes and updates, see GitHub repo for details.</Description>
     <AssemblyName>Docker.DotNet</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
