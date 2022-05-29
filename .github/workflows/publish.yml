@@ -33,6 +33,7 @@ jobs:
           DNF_CODESIGN_SECRET: ${{secrets.DNF_CODESIGN_SECRET}}
       - name: Push packages to NuGet.org
         run: |
+          rm ./packages/*.symbols.nupkg
           dotnet nuget push './packages/Mdarocha.Docker.DotNet.*.nupkg' -k ${{ secrets.NUGET_KEY }} -s https://api.nuget.org/v3/index.json
       - name: Create Release
         uses: actions/create-release@master
