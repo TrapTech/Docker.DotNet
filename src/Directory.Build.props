@@ -15,6 +15,10 @@
         <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <PackageIdPrefix>Mdarocha.Docker.DotNet</PackageIdPrefix>
+    </PropertyGroup>
+
     <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
