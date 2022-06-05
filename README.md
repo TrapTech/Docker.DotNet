@@ -1,8 +1,21 @@
 ﻿# .NET Client for Docker Remote API
 
-This library allows you to interact with [Docker Remote API][docker-remote-api]  endpoints in your .NET applications.
+This library allows you to interact with [Docker Remote API][docker-remote-api] endpoints in your .NET applications.
 
 It is fully asynchronous, designed to be non-blocking and object-oriented way to interact with your Docker daemon programmatically.
+
+## FORK
+
+This package is a **fork** of the original [Docker.DotNet](https://github.com/dotnet/Docker.DotNet) package.
+
+It's published on nuget.org as a separate set of packages from the `TrapTech.` prefix.
+
+Current changes from upstream:
+
+- Fix action to publish packages, making sure all packages are published properly. [Upstream PR](https://github.com/dotnet/Docker.DotNet/pull/563)
+- Bump multiple packages with the help of dependabot.
+
+All larger changes will be made as a PR to the upstream repository.
 
 ## Versioning
 
@@ -16,31 +29,23 @@ or non-breaking feature additions.
 
 ## Installation
 
-[![NuGet latest release](https://img.shields.io/nuget/v/Docker.DotNet.svg)](https://www.nuget.org/packages/Docker.DotNet)
+[![NuGet latest release](https://img.shields.io/nuget/v/TrapTech.Docker.DotNet.svg)](https://www.nuget.org/packages/TrapTech.Docker.DotNet)
 
 You can add this library to your project using [NuGet][nuget].
 
 **Package Manager Console**
 Run the following command in the “Package Manager Console”:
 
-> PM> Install-Package Docker.DotNet
+> PM> Install-Package TrapTech.Docker.DotNet
 
 **Visual Studio**
-Right click to your project in Visual Studio, choose “Manage NuGet Packages” and search for ‘Docker.DotNet’ and click ‘Install’.
+Right click to your project in Visual Studio, choose “Manage NuGet Packages” and search for ‘TrapTech.Docker.DotNet’ and click ‘Install’.
 ([see NuGet Gallery][nuget-gallery].)
 
 **.NET Core Command Line Interface**
 Run the following command from your favorite shell or terminal:
 
-> dotnet add package Docker.DotNet
-
-**Development Builds**
-
-![](https://ci.appveyor.com/api/projects/status/github/Microsoft/Docker.DotNet?branch=master&svg=true)
-
-If you intend to use development builds of Docker.DotNet and don't want to compile the code yourself you can add the package source below to Visual Studio or your Nuget.Config.
-
-> https://ci.appveyor.com/nuget/docker-dotnet-hojfmn6hoed7
+> dotnet add package TrapTech.Docker.DotNet
 
 ## Usage
 
@@ -175,11 +180,11 @@ You can cancel streaming using the CancellationToken. On the other hand, if you 
 
 #### Example: HTTPS Authentication to Docker
 
-If you are [running Docker with TLS (HTTPS)][docker-tls], you can authenticate to the Docker instance using the [**`Docker.DotNet.X509`**][Docker.DotNet.X509] package. You can get this package from NuGet or by running the following command in the “Package Manager Console”:
+If you are [running Docker with TLS (HTTPS)][docker-tls], you can authenticate to the Docker instance using the [**`TrapTech.Docker.DotNet.X509`**][Docker.DotNet.X509] package. You can get this package from NuGet or by running the following command in the “Package Manager Console”:
 
-    PM> Install-Package Docker.DotNet.X509
+    PM> Install-Package TrapTech.Docker.DotNet.X509
 
-Once you add `Docker.DotNet.X509` to your project, use `CertificateCredentials` type:
+Once you add `TrapTech.Docker.DotNet.X509` to your project, use `CertificateCredentials` type:
 
 ```csharp
 var credentials = new CertificateCredentials (new X509Certificate2 ("CertFile", "Password"));
@@ -211,11 +216,11 @@ creds.ServerCertificateValidationCallback += (o, c, ch, er) => true;
 
 #### Example: Basic HTTP Authentication to Docker
 
-If the Docker instance is secured with Basic HTTP Authentication, you can use the [**`Docker.DotNet.BasicAuth`**][Docker.DotNet.BasicAuth] package. Get this package from NuGet or by running the following command in the “Package Manager Console”:
+If the Docker instance is secured with Basic HTTP Authentication, you can use the [**`TrapTech.Docker.DotNet.BasicAuth`**][Docker.DotNet.BasicAuth] package. Get this package from NuGet or by running the following command in the “Package Manager Console”:
 
-    PM> Install-Package Docker.DotNet.BasicAuth
+    PM> Install-Package TrapTech.Docker.DotNet.BasicAuth
 
-Once you added `Docker.DotNet.BasicAuth` to your project, use `BasicAuthCredentials` type:
+Once you added `TrapTech.Docker.DotNet.BasicAuth` to your project, use `BasicAuthCredentials` type:
 
 ```csharp
 var credentials = new BasicAuthCredentials ("YOUR_USERNAME", "YOUR_PASSWORD");
@@ -280,6 +285,6 @@ Copyright (c) .NET Foundation and Contributors
 [docker-remote-api]: https://docs.docker.com/engine/reference/api/docker_remote_api/
 [docker-tls]: https://docs.docker.com/articles/https/
 [nuget]: http://www.nuget.org
-[nuget-gallery]: https://www.nuget.org/packages/Docker.DotNet/
-[Docker.DotNet.X509]: https://www.nuget.org/packages/Docker.DotNet.X509/
-[Docker.DotNet.BasicAuth]: https://www.nuget.org/packages/Docker.DotNet.BasicAuth/
+[nuget-gallery]: https://www.nuget.org/packages/TrapTech.Docker.DotNet/
+[Docker.DotNet.X509]: https://www.nuget.org/packages/TrapTech.Docker.DotNet.X509/
+[Docker.DotNet.BasicAuth]: https://www.nuget.org/packages/TrapTech.Docker.DotNet.BasicAuth/
