@@ -11,8 +11,9 @@ This package is a **fork** of the original [Docker.DotNet](https://github.com/do
 It's published on nuget.org as a separate set of packages from the `TrapTech.` prefix.
 
 Current changes from upstream:
-    - Fix action to publish packages, making sure all packages are published properly. [Upstream PR](https://github.com/dotnet/Docker.DotNet/pull/563)
-    - Bump multiple packages with the help of dependabot.
+
+- Fix action to publish packages, making sure all packages are published properly. [Upstream PR](https://github.com/dotnet/Docker.DotNet/pull/563)
+- Bump multiple packages with the help of dependabot.
 
 All larger changes will be made as a PR to the upstream repository.
 
