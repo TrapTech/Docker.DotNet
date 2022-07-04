@@ -26,7 +26,7 @@ namespace Docker.DotNet.SSH
         {
             // TODO
             return async (string host, int port, CancellationToken cancellationToken) => {
-                return File.OpenRead("/dev/null");
+                return File.OpenWrite("testStream");
             };
         }
     }
