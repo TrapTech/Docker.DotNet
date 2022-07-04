@@ -114,6 +114,14 @@ namespace Docker.DotNet
                     break;
 #endif
 
+                case "ssh":
+                    if(!Configuration.Credentials.IsSshCredentials())
+                    {
+                        throw new ArgumentException("ssh:// protocol can only be used with SSHCredentials");
+                    };
+                    handler = new ManagedHandler(Configuration.Credentials.GetStreamOpener());
+                    break;
+
                 default:
                     throw new Exception($"Unknown URL scheme {configuration.EndpointBaseUri.Scheme}");
             }
