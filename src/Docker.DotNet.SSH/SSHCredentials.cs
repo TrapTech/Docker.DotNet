@@ -15,7 +15,14 @@ namespace Docker.DotNet.SSH
         /// Creates SSH credentials to handle connecting over SSH.
         /// </summary>
         /// <param name="privateKey">The private key contents</param>
-        public SSHCredentials(string privateKey)
+        public SSHCredentials(string privateKey) : this(privateKey, null) { }
+
+        /// <summary>
+        /// Creates SSH credentials to handle connecting over SSH.
+        /// </summary>
+        /// <param name="privateKey">The private key contents</param>
+        /// <param name="password">Password for the private key</param>
+        public SSHCredentials(string privateKey, string password)
         {
             var stream = new MemoryStream();
             using (var writer = new StreamWriter(stream))
@@ -25,7 +32,7 @@ namespace Docker.DotNet.SSH
 
                 stream.Position = 0;
                 // This needs to be created *before* the StreamWriter (which closes the stream) is disposed
-                _privateKey = new PrivateKeyFile(stream);
+                _privateKey = new PrivateKeyFile(stream, password);
             }
         }
 
@@ -44,14 +51,11 @@ namespace Docker.DotNet.SSH
             return false;
         }
 
-        public override ManagedHandler.StreamOpener GetStreamOpener()
+        public override ManagedHandler.StreamOpener GetSshStreamOpener(string user)
         {
             return (string host, int port, CancellationToken cancellationToken) => {
-                // TODO username
-                var user = "ubuntu";
-
                 var authMethod = new PrivateKeyAuthenticationMethod(user, _privateKey);
-                var connectionInfo = new ConnectionInfo(host, port, "ubuntu", authMethod);
+                var connectionInfo = new ConnectionInfo(host, port, user, authMethod);
                 var client = new SshClient(connectionInfo);
                 client.Connect();
 
