@@ -121,7 +121,6 @@ namespace Docker.DotNet
                     };
                     handler = new ManagedHandler(Configuration.Credentials.GetStreamOpener());
                     uri = new UriBuilder("http", uri.Host, uri.IsDefaultPort ? 22 : uri.Port).Uri;
-                    Console.WriteLine(uri.ToString());
                     break;
 
                 default:
