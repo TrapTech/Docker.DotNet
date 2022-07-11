@@ -26,19 +26,19 @@ namespace Docker.DotNet.SSH
 
         public override ManagedHandler.StreamOpener GetStreamOpener()
         {
-            // TODO
-            return async (string host, int port, CancellationToken cancellationToken) => {
+            return (string host, int port, CancellationToken cancellationToken) => {
                 // TODO username
                 var authMethod = new PrivateKeyAuthenticationMethod("ubuntu", new PrivateKeyFile("/home/marek/test_rsa"));
                 var connectionInfo = new ConnectionInfo(host, port, "ubuntu", authMethod);
                 var client = new SshClient(connectionInfo);
                 client.Connect();
 
-                var shellStream = client.CreateShellStream("dumb-terminal", 1, 1, 1, 1, 50);
-                shellStream.WriteLine("docker system dial-stdio");
+                var cmd = client.CreateCommand("docker system dial-stdio");
+                cmd.BeginExecute();
 
-                await Task.Delay(100);
-                return shellStream;
+                var result = new JoinedReadWriteStream(cmd.OutputStream, cmd.InputStream);
+
+                return Task.FromResult((Stream) result);
             };
         }
     }
