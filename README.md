@@ -179,6 +179,26 @@ Stream stream = await client.System.MonitorEventsAsync(new ContainerEventsParame
 
 You can cancel streaming using the CancellationToken. On the other hand, if you wish to continuously stream, you can simply pass `CancellationToken.None`.
 
+#### Example: Connecting to docker over SSH
+
+If you want to access a remote Docker instance, the easier would be [using SSH][docker-ssh]. You can use the [**`TrapTech.Docker.DotNet.SSH`**][Docker.DotNet.SSH] package for this.
+You can get this package from NuGet or by running the following command in the “Package Manager Console”:
+
+    PM> Install-Package TrapTech.Docker.DotNet.SSH
+
+Once you add `TrapTech.Docker.DotNet.SSH` to your project, use `SSHCredentials` type:
+
+```charp
+var credentials = new SSHCredentials ("<your ssh private key contents>");
+
+// SSHCredentials only supports the ssh:// protocol
+// Make sure to specify the user in the URL
+var config = new DockerClientConfiguration("ssh://user@remote-server.com:22", credentials);
+DockerClient client = config.CreateClient();
+```
+
+Make sure your endpoint is accessible over SSH using the specified private key - password authentication is not supported.
+
 #### Example: HTTPS Authentication to Docker
 
 If you are [running Docker with TLS (HTTPS)][docker-tls], you can authenticate to the Docker instance using the [**`TrapTech.Docker.DotNet.X509`**][Docker.DotNet.X509] package. You can get this package from NuGet or by running the following command in the “Package Manager Console”:
@@ -284,8 +304,10 @@ Docker.DotNet is licensed under the [MIT](LICENSE) license.
 Copyright (c) .NET Foundation and Contributors
 
 [docker-remote-api]: https://docs.docker.com/engine/reference/api/docker_remote_api/
-[docker-tls]: https://docs.docker.com/articles/https/
+[docker-tls]: https://docs.docker.com/engine/security/protect-access/#use-tls-https-to-protect-the-docker-daemon-socket
+[docker-ssh]: https://docs.docker.com/engine/security/protect-access/#use-ssh-to-protect-the-docker-daemon-socket
 [nuget]: http://www.nuget.org
 [nuget-gallery]: https://www.nuget.org/packages/TrapTech.Docker.DotNet/
 [Docker.DotNet.X509]: https://www.nuget.org/packages/TrapTech.Docker.DotNet.X509/
 [Docker.DotNet.BasicAuth]: https://www.nuget.org/packages/TrapTech.Docker.DotNet.BasicAuth/
+[Docker.DotNet.SSH]: https://www.nuget.org/packages/TrapTech.Docker.DotNet.SSH/
