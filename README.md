@@ -14,6 +14,7 @@ Current changes from upstream:
 
 - Fix action to publish packages, making sure all packages are published properly. [Upstream PR](https://github.com/dotnet/Docker.DotNet/pull/563)
 - Bump multiple packages with the help of dependabot.
+- Experimental support for connection over SSH.
 
 All larger changes will be made as a PR to the upstream repository.
 
