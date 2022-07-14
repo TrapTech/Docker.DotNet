@@ -188,7 +188,7 @@ You can get this package from NuGet or by running the following command in the â
 
 Once you add `TrapTech.Docker.DotNet.SSH` to your project, use `SSHCredentials` type:
 
-```charp
+```csharp
 var credentials = new SSHCredentials ("<your ssh private key contents>");
 
 // SSHCredentials only supports the ssh:// protocol
