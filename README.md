@@ -12,7 +12,7 @@ It's published on nuget.org as a separate set of packages from the `TrapTech.` p
 
 Current changes from upstream:
 
-- Fix action to publish packages, making sure all packages are published properly. [Upstream PR](https://github.com/dotnet/Docker.DotNet/pull/563)
+- ~~Fix action to publish packages, making sure all packages are published properly. [Upstream PR](https://github.com/dotnet/Docker.DotNet/pull/563)~~
 - Bump multiple packages with the help of dependabot.
 - Experimental support for connection over SSH.
 
