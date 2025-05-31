@@ -67,7 +67,7 @@ namespace Docker.DotNet
             Credentials.Dispose();
         }
 
-        public (Uri url, ManagedHandler handler) GetHandler()
+        public virtual (Uri url, ManagedHandler handler) GetHandler()
         {
             if (!Credentials.SupportsScheme(EndpointBaseUri.Scheme))
             {
